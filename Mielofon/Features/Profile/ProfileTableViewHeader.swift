@@ -2,6 +2,16 @@ import UIKit
 
 final class ProfileTableViewHeader: UIView {
 
+    private var selectedTab = 0 { didSet {
+        for i in sectionStack.arrangedSubviews.indices {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) { [weak self] in
+                self?.sectionStack.arrangedSubviews[i].tintColor = self?.selectedTab == i ? .label : .secondaryLabel
+                self?.leadingAnchors[i].isActive = i == self?.selectedTab
+                self?.trailingAnchors[i].isActive = i == self?.selectedTab
+                self?.layoutIfNeeded()
+            }
+        }
+    }}
     private let profileHeaderImageView = UIImageView()
     private let profileAvatarImageView = UIImageView()
     private let displayNameLabel = UILabel()
@@ -9,6 +19,14 @@ final class ProfileTableViewHeader: UIView {
     private let userBioLabel = UILabel()
     private let joinDateImageView = UIImageView()
     private let joinDateLabel = UILabel()
+    private let followingCountLabel = UILabel()
+    private let followingTextLabel = UILabel()
+    private let followersCountLabel = UILabel()
+    private let followersTextLabel = UILabel()
+    private let sectionStack = UIStackView()
+    private let indicator = UIView()
+    private var leadingAnchors: [NSLayoutConstraint] = []
+    private var trailingAnchors: [NSLayoutConstraint] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +38,12 @@ final class ProfileTableViewHeader: UIView {
     }
     
 }
+// MARK: - Actions
+extension ProfileTableViewHeader {
+    @objc private func didTapTab(_ sender: UIButton) {
+        selectedTab = sender.tag
+    }
+}
 // MARK: - Setup Views
 extension ProfileTableViewHeader {
     private func setupViews() {
@@ -30,6 +54,12 @@ extension ProfileTableViewHeader {
         setupUserBioLabel()
         setupJoinDateImageView()
         setupJoinDateLabel()
+        setupFollowingCountLabel()
+        setupFollowingTextLabel()
+        setupFollowersCountLabel()
+        setupFollowersTextLabel()
+        setupIndicator()
+        setupSectionStack()
     }
     
     private func setupProfileHeaderImageView() {
@@ -124,4 +154,94 @@ extension ProfileTableViewHeader {
             joinDateLabel.centerYAnchor.constraint(equalTo: joinDateImageView.centerYAnchor)
         ])
     }
+    
+    private func setupFollowingCountLabel() {
+        addSubview(followingCountLabel)
+        followingCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        followingCountLabel.text = "314"
+        followingCountLabel.textColor = .label
+        followingCountLabel.font = .systemFont(ofSize: 14, weight: .bold)
+        
+        NSLayoutConstraint.activate([
+            followingCountLabel.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
+            followingCountLabel.topAnchor.constraint(equalToSystemSpacingBelow: joinDateImageView.bottomAnchor, multiplier: 1)
+        ])
+    }
+    
+    private func setupFollowingTextLabel() {
+        addSubview(followingTextLabel)
+        followingTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        followingTextLabel.text = "Following"
+        followingTextLabel.textColor = .secondaryLabel
+        followingTextLabel.font = .systemFont(ofSize: 14)
+        
+        NSLayoutConstraint.activate([
+            followingTextLabel.centerYAnchor.constraint(equalTo: followingCountLabel.centerYAnchor),
+            followingTextLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: followingCountLabel.trailingAnchor, multiplier: 1)
+        ])
+    }
+    
+    private func setupFollowersCountLabel() {
+        addSubview(followersCountLabel)
+        followersCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        followersCountLabel.text = "100"
+        followersCountLabel.textColor = .label
+        followersCountLabel.font = .systemFont(ofSize: 14, weight: .bold)
+        
+        NSLayoutConstraint.activate([
+            followersCountLabel.centerYAnchor.constraint(equalTo: followingCountLabel.centerYAnchor),
+            followersCountLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: followingTextLabel.trailingAnchor, multiplier: 1)
+        ])
+    }
+    
+    private func setupFollowersTextLabel() {
+        addSubview(followersTextLabel)
+        followersTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        followersTextLabel.text = "Followers"
+        followersTextLabel.textColor = .secondaryLabel
+        followersTextLabel.font = .systemFont(ofSize: 14)
+        
+        NSLayoutConstraint.activate([
+            followersTextLabel.centerYAnchor.constraint(equalTo: followingCountLabel.centerYAnchor),
+            followersTextLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: followersCountLabel.trailingAnchor, multiplier: 1)
+        ])
+    }
+    
+    private func setupIndicator() {
+        addSubview(indicator)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.backgroundColor = .systemBlue
+    }
+    
+    private func setupSectionStack() {
+        addSubview(sectionStack)
+        sectionStack.translatesAutoresizingMaskIntoConstraints = false
+        sectionStack.axis = .horizontal
+        sectionStack.distribution = .equalSpacing
+        var tag = 0
+        ["Tweets", "Tweets & Relies", "Media", "Likes"].forEach {
+            let button = UIButton(type: .system)
+            button.setTitle($0, for: [])
+            button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+            button.tintColor = tag == 0 ? .label : .secondaryLabel
+            button.tag = tag
+            tag += 1
+            button.addTarget(self, action: #selector(didTapTab), for: .primaryActionTriggered)
+            sectionStack.addArrangedSubview(button)
+            leadingAnchors.append(indicator.leadingAnchor.constraint(equalTo: button.leadingAnchor))
+            trailingAnchors.append(indicator.trailingAnchor.constraint(equalTo: button.trailingAnchor))
+        }
+        
+        NSLayoutConstraint.activate([
+            sectionStack.topAnchor.constraint(equalToSystemSpacingBelow: followingCountLabel.bottomAnchor, multiplier: 2),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: sectionStack.trailingAnchor, multiplier: 2),
+            sectionStack.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            leadingAnchors[0],
+            trailingAnchors[0],
+            indicator.topAnchor.constraint(equalTo: sectionStack.bottomAnchor, constant: 1),
+            indicator.heightAnchor.constraint(equalToConstant: 4)
+        ])
+    }
+    
+
 }

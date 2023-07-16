@@ -36,7 +36,7 @@ extension ProfileViewController {
     private func setupProfileTableView() {
         let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0,
                                                               width: profileTableView.frame.width,
-                                                              height: 350))
+                                                              height: 400))
         view.addSubview(profileTableView)
         profileTableView.translatesAutoresizingMaskIntoConstraints = false
         profileTableView.register(TweetTableViewCell.self, forCellReuseIdentifier: TweetTableViewCell.identifier)
