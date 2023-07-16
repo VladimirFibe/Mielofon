@@ -8,11 +8,19 @@ final class HomeViewController: UIViewController {
         setupViews()
     }
 }
+// MARK: - Actions
+extension HomeViewController {
+    @objc private func didTapProfile() {
+        let viewController = ProfileViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}
 
 // MARK: - Setup Views
 extension HomeViewController {
     private func setupViews() {
         setupTimelineTableView()
+        configureNavigationBar()
     }
     
     private func setupTimelineTableView() {
@@ -27,6 +35,22 @@ extension HomeViewController {
             timelineTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             timelineTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func configureNavigationBar() {
+        let size: CGFloat = 36
+        let logoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        logoImageView.contentMode = .scaleToFill
+        logoImageView.image = UIImage(named: "twitterLogo")
+        
+        let middleView = UIView(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        middleView.addSubview(logoImageView)
+        navigationItem.titleView = middleView
+        
+        let profileImage = UIImage(systemName: "person")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: profileImage,
+                                                           style: .plain, target: self,
+                                                           action: #selector(didTapProfile))
     }
 }
 // MARK: - UITableViewDelegate

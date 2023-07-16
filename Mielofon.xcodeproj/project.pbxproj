@@ -14,6 +14,8 @@
 		023F29892A631D7100986DB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 023F29872A631D7100986DB4 /* LaunchScreen.storyboard */; };
 		023F29912A631FC800986DB4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F29902A631FC800986DB4 /* HomeViewController.swift */; };
 		023F29932A63200400986DB4 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F29922A63200400986DB4 /* TweetTableViewCell.swift */; };
+		026233972A6386A100386A91 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026233962A6386A100386A91 /* ProfileViewController.swift */; };
+		026233992A6394F800386A91 /* ProfileTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026233982A6394F800386A91 /* ProfileTableViewHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		023F298A2A631D7100986DB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		023F29902A631FC800986DB4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		023F29922A63200400986DB4 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		026233962A6386A100386A91 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		026233982A6394F800386A91 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,16 +73,18 @@
 			isa = PBXGroup;
 			children = (
 				023F29962A6321B500986DB4 /* Home */,
-				023F29952A6321A400986DB4 /* Tweet */,
+				023F29952A6321A400986DB4 /* Profile */,
 			);
 			path = Features;
 			sourceTree = "<group>";
 		};
-		023F29952A6321A400986DB4 /* Tweet */ = {
+		023F29952A6321A400986DB4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				026233962A6386A100386A91 /* ProfileViewController.swift */,
+				026233982A6394F800386A91 /* ProfileTableViewHeader.swift */,
 			);
-			path = Tweet;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		023F29962A6321B500986DB4 /* Home */ = {
@@ -180,6 +186,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				026233992A6394F800386A91 /* ProfileTableViewHeader.swift in Sources */,
+				026233972A6386A100386A91 /* ProfileViewController.swift in Sources */,
 				023F29812A631D7100986DB4 /* ViewController.swift in Sources */,
 				023F297D2A631D7100986DB4 /* AppDelegate.swift in Sources */,
 				023F297F2A631D7100986DB4 /* SceneDelegate.swift in Sources */,

@@ -111,7 +111,7 @@ extension TweetTableViewCell {
     private func setupReplyButton() {
         contentView.addSubview(replyButton)
         replyButton.translatesAutoresizingMaskIntoConstraints = false
-        replyButton.setImage(UIImage(systemName: "bubble.left"), for: [])
+        replyButton.setImage(UIImage(named: "replyIcon"), for: [])
         replyButton.tintColor = .systemGray2
         replyButton.addTarget(self, action: #selector(didTapReply), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([
@@ -125,7 +125,7 @@ extension TweetTableViewCell {
     private func setupRetweetButton() {
         contentView.addSubview(retweetButton)
         retweetButton.translatesAutoresizingMaskIntoConstraints = false
-        retweetButton.setImage(UIImage(systemName: "arrow.2.squarepath"), for: [])
+        retweetButton.setImage(UIImage(named: "retweetIcon"), for: [])
         retweetButton.tintColor = .systemGray2
         retweetButton.addTarget(self, action: #selector(didTapRetweet), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([
@@ -137,7 +137,7 @@ extension TweetTableViewCell {
     private func setupLikeButton() {
         contentView.addSubview(likeButton)
         likeButton.translatesAutoresizingMaskIntoConstraints = false
-        likeButton.setImage(UIImage(systemName: "heart"), for: [])
+        likeButton.setImage(UIImage(named: "heartIcon"), for: [])
         likeButton.tintColor = .systemGray2
         likeButton.addTarget(self, action: #selector(didTapLike), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([
@@ -149,7 +149,7 @@ extension TweetTableViewCell {
     private func setupShareButton() {
         contentView.addSubview(shareButton)
         shareButton.translatesAutoresizingMaskIntoConstraints = false
-        shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: [])
+        shareButton.setImage(UIImage(named: "shareIcon"), for: [])
         shareButton.tintColor = .systemGray2
         shareButton.addTarget(self, action: #selector(didTapShare), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([
