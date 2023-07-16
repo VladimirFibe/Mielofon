@@ -1,6 +1,9 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+    private var isStatusBarHidden = true
+    private var statusBarHeight: CGFloat { view.bounds.height > 800 ? 40 : 20 }
+    private let statusBar = UIView()
     private let profileTableView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,24 +15,39 @@ extension ProfileViewController {
     private func setupViews() {
         title = "Profile"
         view.backgroundColor = .systemBackground
-        
         setupProfileTableView()
+        setupStatusBar()
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    private func setupStatusBar() {
+        view.addSubview(statusBar)
+        statusBar.translatesAutoresizingMaskIntoConstraints = false
+        statusBar.backgroundColor = .systemBackground
+        statusBar.layer.opacity = 0
+        NSLayoutConstraint.activate([
+            statusBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            statusBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            statusBar.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBar.heightAnchor.constraint(equalToConstant: statusBarHeight)
+        ])
     }
     
     private func setupProfileTableView() {
+        let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0,
+                                                              width: profileTableView.frame.width,
+                                                              height: 350))
         view.addSubview(profileTableView)
         profileTableView.translatesAutoresizingMaskIntoConstraints = false
         profileTableView.register(TweetTableViewCell.self, forCellReuseIdentifier: TweetTableViewCell.identifier)
         profileTableView.delegate = self
         profileTableView.dataSource = self
-        let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0,
-                                                     width: profileTableView.frame.width,
-                                                     height: 480))
         profileTableView.tableHeaderView = headerView
+        profileTableView.contentInsetAdjustmentBehavior = .never
         NSLayoutConstraint.activate([
-            profileTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            profileTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            profileTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            profileTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -38,6 +56,25 @@ extension ProfileViewController {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yPosition = scrollView.contentOffset.y
+        if yPosition > (150 - statusBarHeight) && isStatusBarHidden {
+            isStatusBarHidden = false
+            UIView.animate(withDuration: 0.3,
+                           delay: 0,
+                           options: .curveLinear) { [weak self] in
+                self?.statusBar.layer.opacity = 1
+            }
+        } else if yPosition < (150 - statusBarHeight) && !isStatusBarHidden {
+            isStatusBarHidden = true
+            UIView.animate(withDuration: 0.3,
+                           delay: 0,
+                           options: .curveLinear) { [weak self] in
+                self?.statusBar.layer.opacity = 0
+            }
+        }
     }
 }
 // MARK: - UITableViewDataSource

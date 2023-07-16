@@ -7,6 +7,11 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
 }
 // MARK: - Actions
 extension HomeViewController {

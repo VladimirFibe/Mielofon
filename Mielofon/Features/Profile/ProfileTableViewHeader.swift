@@ -42,7 +42,7 @@ extension ProfileTableViewHeader {
             profileHeaderImageView.topAnchor.constraint(equalTo: topAnchor),
             profileHeaderImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             profileHeaderImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            profileHeaderImageView.heightAnchor.constraint(equalToConstant: 180)
+            profileHeaderImageView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     
