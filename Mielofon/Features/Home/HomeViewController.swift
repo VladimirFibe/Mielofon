@@ -12,11 +12,7 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-        if Auth.auth().currentUser == nil {
-            let controller = UINavigationController(rootViewController: OnboardingViewController())
-            controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: false)
-        }
+        handleAuthentication()
     }
 }
 // MARK: - Actions
@@ -27,9 +23,16 @@ extension HomeViewController {
     }
     
     @objc private func didTapLogout() {
-        do {
-            try Auth.auth().signOut()
-        } catch {}
+        AuthManager.shared.signOut()
+        handleAuthentication()
+    }
+    
+    private func handleAuthentication() {
+        if Auth.auth().currentUser == nil {
+            let controller = UINavigationController(rootViewController: OnboardingViewController())
+            controller.modalPresentationStyle = .fullScreen
+            present(controller, animated: false)
+        }
     }
 }
 
@@ -69,7 +72,9 @@ extension HomeViewController {
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(didTapProfile))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout",
+        
+        let logoutImage = UIImage(systemName: "rectangle.portrait.and.arrow.right")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: logoutImage,
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(didTapLogout))

@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		021FAD8A2A64C05300B183C3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD892A64C05300B183C3 /* RegisterViewController.swift */; };
-		021FAD8D2A64D09F00B183C3 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD8C2A64D09F00B183C3 /* RegisterViewModel.swift */; };
+		021FAD8D2A64D09F00B183C3 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD8C2A64D09F00B183C3 /* AuthenticationViewModel.swift */; };
 		021FAD902A64DE4000B183C3 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD8F2A64DE4000B183C3 /* AuthManager.swift */; };
+		021FAD942A6503C100B183C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD932A6503C100B183C3 /* LoginViewController.swift */; };
+		021FAD972A650AEA00B183C3 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD962A650AEA00B183C3 /* AuthenticationViewController.swift */; };
 		023F297D2A631D7100986DB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F297C2A631D7100986DB4 /* AppDelegate.swift */; };
 		023F297F2A631D7100986DB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F297E2A631D7100986DB4 /* SceneDelegate.swift */; };
 		023F29812A631D7100986DB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F29802A631D7100986DB4 /* ViewController.swift */; };
@@ -35,8 +37,10 @@
 
 /* Begin PBXFileReference section */
 		021FAD892A64C05300B183C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		021FAD8C2A64D09F00B183C3 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		021FAD8C2A64D09F00B183C3 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		021FAD8F2A64DE4000B183C3 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		021FAD932A6503C100B183C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		021FAD962A650AEA00B183C3 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		023F29792A631D7100986DB4 /* Mielofon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mielofon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		023F297C2A631D7100986DB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		023F297E2A631D7100986DB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				021FAD892A64C05300B183C3 /* RegisterViewController.swift */,
-				021FAD8C2A64D09F00B183C3 /* RegisterViewModel.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -96,6 +99,23 @@
 				02A84DE42A644FFB001D1C17 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		021FAD922A6503AF00B183C3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				021FAD932A6503C100B183C3 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		021FAD952A650ABC00B183C3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				021FAD8C2A64D09F00B183C3 /* AuthenticationViewModel.swift */,
+				021FAD962A650AEA00B183C3 /* AuthenticationViewController.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		023F29702A631D7100986DB4 = {
@@ -177,6 +197,8 @@
 		02A84DE32A644EE6001D1C17 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				021FAD952A650ABC00B183C3 /* Authentication */,
+				021FAD922A6503AF00B183C3 /* Login */,
 				021FAD912A64ECCA00B183C3 /* Onboarding */,
 				021FAD8B2A64D08D00B183C3 /* Register */,
 			);
@@ -269,8 +291,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				021FAD942A6503C100B183C3 /* LoginViewController.swift in Sources */,
 				021FAD8A2A64C05300B183C3 /* RegisterViewController.swift in Sources */,
-				021FAD8D2A64D09F00B183C3 /* RegisterViewModel.swift in Sources */,
+				021FAD8D2A64D09F00B183C3 /* AuthenticationViewModel.swift in Sources */,
 				026233992A6394F800386A91 /* ProfileTableViewHeader.swift in Sources */,
 				026233972A6386A100386A91 /* ProfileViewController.swift in Sources */,
 				023F29812A631D7100986DB4 /* ViewController.swift in Sources */,
@@ -278,6 +301,7 @@
 				023F297D2A631D7100986DB4 /* AppDelegate.swift in Sources */,
 				023F297F2A631D7100986DB4 /* SceneDelegate.swift in Sources */,
 				021FAD902A64DE4000B183C3 /* AuthManager.swift in Sources */,
+				021FAD972A650AEA00B183C3 /* AuthenticationViewController.swift in Sources */,
 				023F29932A63200400986DB4 /* TweetTableViewCell.swift in Sources */,
 				023F29912A631FC800986DB4 /* HomeViewController.swift in Sources */,
 			);

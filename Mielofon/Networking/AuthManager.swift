@@ -1,10 +1,3 @@
-//
-//  AuthManager.swift
-//  Mielofon
-//
-//  Created by Vladimir Fibe on 17.07.2023.
-//
-
 import Foundation
 import Firebase
 import FirebaseAuthCombineSwift
@@ -18,5 +11,17 @@ final class AuthManager {
         Auth.auth().createUser(withEmail: email, password: password)
             .map(\.user)
             .eraseToAnyPublisher()
+    }
+    
+    func signIn(withEmail email: String, password: String) -> AnyPublisher<User, Error> {
+        Auth.auth().signIn(withEmail: email, password: password)
+            .map(\.user)
+            .eraseToAnyPublisher()
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {}
     }
 }

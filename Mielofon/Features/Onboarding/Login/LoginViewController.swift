@@ -1,7 +1,7 @@
 import UIKit
 import Combine
 
-class RegisterViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     private var viewModel = AuthenticationViewModel()
     private var subscriptions: Set<AnyCancellable> = []
@@ -17,9 +17,9 @@ class RegisterViewController: UIViewController {
 }
 
 // MARK: - Action
-extension RegisterViewController {
+extension LoginViewController {
     @objc private func didTapRegisterButton() {
-        viewModel.register()
+        viewModel.login()
     }
     
     @objc private func didChangeEmailField() {
@@ -41,7 +41,7 @@ extension RegisterViewController {
     }
 }
 // MARK: - Setup Views
-extension RegisterViewController {
+extension LoginViewController {
     private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
@@ -65,7 +65,7 @@ extension RegisterViewController {
     private func setupRegisterTitleLabel() {
         view.addSubview(registerTitleLabel)
         registerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        registerTitleLabel.text = "Create your account"
+        registerTitleLabel.text = "Login to your account"
         registerTitleLabel.font = .systemFont(ofSize: 32, weight: .bold)
         
         NSLayoutConstraint.activate([
@@ -111,7 +111,7 @@ extension RegisterViewController {
         view.addSubview(registerButton)
         registerButton.isEnabled = false
         registerButton.translatesAutoresizingMaskIntoConstraints = false
-        registerButton.setTitle("Create account", for: [])
+        registerButton.setTitle("Login", for: [])
         registerButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         registerButton.addTarget(self, action: #selector(didTapRegisterButton), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([

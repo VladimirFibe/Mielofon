@@ -16,7 +16,13 @@ class OnboardingViewController: UIViewController {
 // MARK: - Action
 extension OnboardingViewController {
     @objc private func didTapRegisterButton() {
-        let controller = RegisterViewController()
+        let controller = AuthenticationViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc private func didTapLoginButton() {
+        let controller = AuthenticationViewController()
+        controller.isLogin = true
         navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -78,7 +84,7 @@ extension OnboardingViewController {
         loginButton.setTitle("Login", for: [])
         loginButton.titleLabel?.font = .systemFont(ofSize: 14)
         loginButton.tintColor = .blue
-        
+        loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([
             loginButton.centerYAnchor.constraint(equalTo: promptLabel.centerYAnchor),
             loginButton.leadingAnchor.constraint(equalToSystemSpacingAfter: promptLabel.trailingAnchor, multiplier: 1)

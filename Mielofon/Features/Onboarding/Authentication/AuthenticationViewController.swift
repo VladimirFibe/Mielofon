@@ -1,12 +1,14 @@
 import UIKit
 import Combine
 
-class RegisterViewController: UIViewController {
-
+class AuthenticationViewController: UIViewController {
+    var isLogin = false
+    var welcome: String { isLogin ? "Login to your account" : "Create your account"}
+    var buttonTitle: String { isLogin ? "Login" : "Create account"}
     private var viewModel = AuthenticationViewModel()
     private var subscriptions: Set<AnyCancellable> = []
     
-    private let registerTitleLabel = UILabel()
+    private let titleLabel = UILabel()
     private let emailTextField = UITextField()
     private let passwordTextField = UITextField()
     private let registerButton = UIButton(type: .system)
@@ -15,11 +17,14 @@ class RegisterViewController: UIViewController {
         setupViews()
     }
 }
-
 // MARK: - Action
-extension RegisterViewController {
+extension AuthenticationViewController {
     @objc private func didTapRegisterButton() {
-        viewModel.register()
+        if isLogin {
+            viewModel.login()
+        } else {
+            viewModel.register()
+        }
     }
     
     @objc private func didChangeEmailField() {
@@ -41,7 +46,7 @@ extension RegisterViewController {
     }
 }
 // MARK: - Setup Views
-extension RegisterViewController {
+extension AuthenticationViewController {
     private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
@@ -63,14 +68,14 @@ extension RegisterViewController {
     }
     
     private func setupRegisterTitleLabel() {
-        view.addSubview(registerTitleLabel)
-        registerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        registerTitleLabel.text = "Create your account"
-        registerTitleLabel.font = .systemFont(ofSize: 32, weight: .bold)
+        view.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = welcome
+        titleLabel.font = .systemFont(ofSize: 32, weight: .bold)
         
         NSLayoutConstraint.activate([
-            registerTitleLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
-            registerTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
@@ -84,7 +89,7 @@ extension RegisterViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         
         NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalToSystemSpacingBelow: registerTitleLabel.bottomAnchor, multiplier: 2),
+            emailTextField.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 2),
             emailTextField.heightAnchor.constraint(equalToConstant: 60),
             emailTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: emailTextField.trailingAnchor, multiplier: 2)
@@ -111,7 +116,7 @@ extension RegisterViewController {
         view.addSubview(registerButton)
         registerButton.isEnabled = false
         registerButton.translatesAutoresizingMaskIntoConstraints = false
-        registerButton.setTitle("Create account", for: [])
+        registerButton.setTitle(buttonTitle, for: [])
         registerButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         registerButton.addTarget(self, action: #selector(didTapRegisterButton), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([
