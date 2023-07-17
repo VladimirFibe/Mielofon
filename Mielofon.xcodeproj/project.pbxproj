@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021FAD8A2A64C05300B183C3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD892A64C05300B183C3 /* RegisterViewController.swift */; };
 		023F297D2A631D7100986DB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F297C2A631D7100986DB4 /* AppDelegate.swift */; };
 		023F297F2A631D7100986DB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F297E2A631D7100986DB4 /* SceneDelegate.swift */; };
 		023F29812A631D7100986DB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F29802A631D7100986DB4 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		021FAD892A64C05300B183C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		023F29792A631D7100986DB4 /* Mielofon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mielofon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		023F297C2A631D7100986DB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		023F297E2A631D7100986DB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				02A84DE42A644FFB001D1C17 /* OnboardingViewController.swift */,
+				021FAD892A64C05300B183C3 /* RegisterViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				021FAD8A2A64C05300B183C3 /* RegisterViewController.swift in Sources */,
 				026233992A6394F800386A91 /* ProfileTableViewHeader.swift in Sources */,
 				026233972A6386A100386A91 /* ProfileViewController.swift in Sources */,
 				023F29812A631D7100986DB4 /* ViewController.swift in Sources */,
