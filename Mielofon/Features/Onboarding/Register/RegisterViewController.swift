@@ -1,5 +1,4 @@
 import UIKit
-import FirebaseAuth
 import Combine
 
 class RegisterViewController: UIViewController {
@@ -49,7 +48,11 @@ extension RegisterViewController {
         viewModel.$isAuthenticationFormValid
             .sink { [weak self] value in self?.registerButton.isEnabled = value }
             .store(in: &subscriptions)
-                
+        viewModel.$user
+            .sink { [weak self] user in
+                print(user)
+            }
+            .store(in: &subscriptions)
         setupRegisterTitleLabel()
         setupEmailTextField()
         setupPasswordTextField()
