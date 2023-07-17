@@ -25,6 +25,12 @@ extension HomeViewController {
         let viewController = ProfileViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    @objc private func didTapLogout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {}
+    }
 }
 
 // MARK: - Setup Views
@@ -60,8 +66,13 @@ extension HomeViewController {
         
         let profileImage = UIImage(systemName: "person")
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: profileImage,
-                                                           style: .plain, target: self,
+                                                           style: .plain,
+                                                           target: self,
                                                            action: #selector(didTapProfile))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(didTapLogout))
     }
 }
 // MARK: - UITableViewDelegate

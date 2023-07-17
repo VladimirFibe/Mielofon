@@ -1,13 +1,16 @@
 import UIKit
 import FirebaseAuth
+import Combine
 
 class RegisterViewController: UIViewController {
 
+    private var viewModel = RegisterViewModel()
+    private var subscriptions: Set<AnyCancellable> = []
+    
     private let registerTitleLabel = UILabel()
     private let emailTextField = UITextField()
     private let passwordTextField = UITextField()
     private let registerButton = UIButton(type: .system)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -17,16 +20,36 @@ class RegisterViewController: UIViewController {
 // MARK: - Action
 extension RegisterViewController {
     @objc private func didTapRegisterButton() {
-        guard let email = emailTextField.text,
-                let password = passwordTextField.text
-        else { return }
-        Auth.auth().createUser(withEmail: email, password: password)
+        viewModel.register()
+    }
+    
+    @objc private func didChangeEmailField() {
+        if let email = emailTextField.text {
+            viewModel.email = email
+            viewModel.validateAuthenticationForm()
+        }
+    }
+    
+    @objc private func didChangePasswordField() {
+        if let password = passwordTextField.text {
+            viewModel.password = password
+            viewModel.validateAuthenticationForm()
+        }
+    }
+    
+    @objc private func didTapToDismiss() {
+        view.endEditing(true)
     }
 }
 // MARK: - Setup Views
 extension RegisterViewController {
     private func setupViews() {
         view.backgroundColor = .systemBackground
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        viewModel.$isAuthenticationFormValid
+            .sink { [weak self] value in self?.registerButton.isEnabled = value }
+            .store(in: &subscriptions)
+                
         setupRegisterTitleLabel()
         setupEmailTextField()
         setupPasswordTextField()
@@ -49,6 +72,7 @@ extension RegisterViewController {
         view.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.keyboardType = .emailAddress
+        emailTextField.addTarget(self, action: #selector(didChangeEmailField), for: .editingChanged)
         emailTextField.attributedPlaceholder = NSAttributedString(
             string: "Email",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
@@ -68,7 +92,7 @@ extension RegisterViewController {
             string: "Password",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         passwordTextField.isSecureTextEntry = true
-        
+        passwordTextField.addTarget(self, action: #selector(didChangePasswordField), for: .editingChanged)
         NSLayoutConstraint.activate([
             passwordTextField.topAnchor.constraint(equalToSystemSpacingBelow: emailTextField.bottomAnchor, multiplier: 1),
             passwordTextField.heightAnchor.constraint(equalToConstant: 60),
@@ -79,6 +103,7 @@ extension RegisterViewController {
     
     private func setupRegisterButton() {
         view.addSubview(registerButton)
+        registerButton.isEnabled = false
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         registerButton.setTitle("Create account", for: [])
         registerButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
