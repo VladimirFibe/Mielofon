@@ -1,5 +1,6 @@
 import UIKit
 import Combine
+import Firebase
 import FirebaseStorage
 
 final class ProfileDataFormViewModel: ObservableObject {
@@ -12,7 +13,8 @@ final class ProfileDataFormViewModel: ObservableObject {
     @Published var image: UIImage? = nil
     @Published var isFormValid = false
     @Published var error: String? = nil
-    @Published var url: URL? = nil
+    @Published var isOnboardingFinished = false
+
     func validateUserProfileForm() {
         isFormValid = displayName.count > 2 && username.count > 2 && bio.count > 2 && image != nil
     }
@@ -29,13 +31,37 @@ final class ProfileDataFormViewModel: ObservableObject {
             StorageManager.shared.getDownloadURL(for: metaData.path)
         })
         .sink(receiveCompletion: { [weak self] completion in
-            if case .failure(let error) = completion {
+            switch completion {
+            case .failure(let error):
                 self?.error = error.localizedDescription
+            case .finished:
+                self?.updateUserData()
             }
         }, receiveValue: { [weak self] url in
-            self?.url = url
+            self?.avatarPath = url.absoluteString
         })
         .store(in: &subscriptions)
-        
+    }
+    
+    private func updateUserData() {
+        guard let id = Auth.auth().currentUser?.uid else { return }
+        let updatedFields: [String: Any] = [
+            "displayName": displayName,
+            "username": username,
+            "bio": bio,
+            "avatar": avatarPath,
+            "isUserOnboarded": true
+        ]
+        DatabaseManager.shared.collectionPersons(updateFields: updatedFields, for: id)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    print(error.localizedDescription)
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: { [weak self] updated in
+                self?.isOnboardingFinished = updated
+            }
+            .store(in: &subscriptions)
+
     }
 }

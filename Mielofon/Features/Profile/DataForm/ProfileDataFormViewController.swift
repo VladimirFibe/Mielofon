@@ -58,7 +58,11 @@ extension ProfileDataFormViewController {
             }
             .store(in: &subscriptions)
         
-        
+        viewModel.$isOnboardingFinished
+            .sink { [weak self] success in
+                self?.dismiss(animated: true)
+            }
+            .store(in: &subscriptions)
     }
 }
 // MARK: - Setup Views
@@ -261,6 +265,4 @@ extension ProfileDataFormViewController: PHPickerViewControllerDelegate {
             }
         }
     }
-    
-    
 }

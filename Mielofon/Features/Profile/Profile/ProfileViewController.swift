@@ -1,13 +1,38 @@
 import UIKit
+import Combine
 
 final class ProfileViewController: UIViewController {
+    private let viewModel = ProfileViewModel()
+    private var subscriptions: Set<AnyCancellable> = []
+
     private var isStatusBarHidden = true
     private var statusBarHeight: CGFloat { view.bounds.height > 800 ? 40 : 20 }
     private let statusBar = UIView()
     private let profileTableView = UITableView()
+    private lazy var headerView = ProfileTableViewHeader(
+        frame: CGRect(x: 0, y: 0,
+                      width: profileTableView.frame.width,
+                      height: 400))
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.retrivePerson()
+    }
+}
+// MARK: - Action
+extension ProfileViewController {
+    private func bindViews() {
+        viewModel.$person
+            .sink {[weak self] person in
+                if let person {
+                    self?.headerView.configure(with: person)
+                }
+            }
+            .store(in: &subscriptions)
     }
 }
 // MARK: - Setup View
@@ -17,6 +42,7 @@ extension ProfileViewController {
         view.backgroundColor = .systemBackground
         setupProfileTableView()
         setupStatusBar()
+        bindViews()
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -34,9 +60,6 @@ extension ProfileViewController {
     }
     
     private func setupProfileTableView() {
-        let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0,
-                                                              width: profileTableView.frame.width,
-                                                              height: 400))
         view.addSubview(profileTableView)
         profileTableView.translatesAutoresizingMaskIntoConstraints = false
         profileTableView.register(TweetTableViewCell.self, forCellReuseIdentifier: TweetTableViewCell.identifier)

@@ -5,8 +5,8 @@ struct Person: Codable {
     let id: String
     var displayName: String = ""
     var username: String = ""
-    var followersCount: Double = 0.0
-    var followingCount: Double = 0.0
+    var followersCount = 0
+    var followingCount = 0
     var createdOn: Date = Date()
     var bio: String = ""
     var avatar: String = ""

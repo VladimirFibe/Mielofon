@@ -27,4 +27,10 @@ final class DatabaseManager {
             .tryMap { try $0.data(as: Person.self) }
             .eraseToAnyPublisher()
     }
+    
+    func collectionPersons(updateFields: [String: Any], for id: String) -> AnyPublisher<Bool, Error> {
+        db.collection(personPath).document(id).updateData(updateFields)
+            .map { _ in true}
+            .eraseToAnyPublisher()
+    }
 }

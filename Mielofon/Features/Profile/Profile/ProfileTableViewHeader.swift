@@ -1,5 +1,5 @@
 import UIKit
-
+import Kingfisher
 final class ProfileTableViewHeader: UIView {
 
     private var selectedTab = 0 { didSet {
@@ -37,6 +37,15 @@ final class ProfileTableViewHeader: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(with person: Person) {
+        let url = URL(string: person.avatar)
+        profileAvatarImageView.kf.setImage(with: url)
+        displayNameLabel.text = person.displayName
+        usernameLabel.text = "@\(person.username)"
+        userBioLabel.text = person.bio
+        followersCountLabel.text = "\(person.followersCount)"
+        followingCountLabel.text = "\(person.followingCount)"
+    }
 }
 // MARK: - Actions
 extension ProfileTableViewHeader {
@@ -96,7 +105,6 @@ extension ProfileTableViewHeader {
     private func setupDisplayNameLabel() {
         addSubview(displayNameLabel)
         displayNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        displayNameLabel.text = "Vladimir Fibe"
         displayNameLabel.font = .systemFont(ofSize: 22, weight: .bold)
         displayNameLabel.textColor = .label
         NSLayoutConstraint.activate([
@@ -108,7 +116,6 @@ extension ProfileTableViewHeader {
     private func setupUsernameLabel() {
         addSubview(usernameLabel)
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
-        usernameLabel.text = "@macuser"
         usernameLabel.textColor = .secondaryLabel
         usernameLabel.font = .systemFont(ofSize: 18)
         NSLayoutConstraint.activate([
@@ -120,7 +127,6 @@ extension ProfileTableViewHeader {
     private func setupUserBioLabel() {
         addSubview(userBioLabel)
         userBioLabel.translatesAutoresizingMaskIntoConstraints = false
-        userBioLabel.text = "iOS Developer"
         userBioLabel.numberOfLines = 3
         userBioLabel.textColor = .label
         userBioLabel.font = .systemFont(ofSize: 18)
@@ -158,7 +164,6 @@ extension ProfileTableViewHeader {
     private func setupFollowingCountLabel() {
         addSubview(followingCountLabel)
         followingCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        followingCountLabel.text = "314"
         followingCountLabel.textColor = .label
         followingCountLabel.font = .systemFont(ofSize: 14, weight: .bold)
         
@@ -184,7 +189,6 @@ extension ProfileTableViewHeader {
     private func setupFollowersCountLabel() {
         addSubview(followersCountLabel)
         followersCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        followersCountLabel.text = "100"
         followersCountLabel.textColor = .label
         followersCountLabel.font = .systemFont(ofSize: 14, weight: .bold)
         
