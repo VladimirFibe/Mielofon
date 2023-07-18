@@ -34,6 +34,32 @@ extension ProfileDataFormViewController {
         picker.delegate = self
         present(picker, animated: true)
     }
+    
+    @objc private func didUpdateDisplayName() {
+        guard let displayName = displayNameTextField.text else { return }
+        viewModel.displayName = displayName
+        viewModel.validateUserProfileForm()
+    }
+    
+    @objc private func didUpdateUsernName() {
+        guard let username = usernameTextField.text else { return }
+        viewModel.username = username
+        viewModel.validateUserProfileForm()
+    }
+    
+    @objc private func didTapSubmit() {
+        viewModel.uploadAvatar()
+    }
+    
+    private func bindViews() {
+        viewModel.$isFormValid
+            .sink { [weak self] state in
+                self?.submitButton.isEnabled = state
+            }
+            .store(in: &subscriptions)
+        
+        
+    }
 }
 // MARK: - Setup Views
 extension ProfileDataFormViewController {
@@ -46,6 +72,7 @@ extension ProfileDataFormViewController {
         setupUsernameTextField()
         setupBioTextView()
         setupSubmitButton()
+        bindViews()
     }
     
     private func setupView() {
@@ -116,6 +143,7 @@ extension ProfileDataFormViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
         )
         displayNameTextField.delegate = self
+        displayNameTextField.addTarget(self, action: #selector(didUpdateDisplayName), for: .editingChanged)
         NSLayoutConstraint.activate([
             displayNameTextField.topAnchor.constraint(equalToSystemSpacingBelow: avatarPlaceholderImageView.bottomAnchor, multiplier: 2),
             displayNameTextField.leadingAnchor.constraint(equalTo: hintLabel.leadingAnchor),
@@ -136,6 +164,7 @@ extension ProfileDataFormViewController {
             string: "User Name",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         usernameTextField.delegate = self
+        usernameTextField.addTarget(self, action: #selector(didUpdateUsernName), for: .editingChanged)
         NSLayoutConstraint.activate([
             usernameTextField.topAnchor.constraint(equalToSystemSpacingBelow: displayNameTextField.bottomAnchor, multiplier: 1),
             usernameTextField.leadingAnchor.constraint(equalTo: hintLabel.leadingAnchor),
@@ -172,6 +201,8 @@ extension ProfileDataFormViewController {
         submitButton.tintColor = .white
         submitButton.setTitle("Submit", for: [])
         submitButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold )
+        submitButton.isEnabled = false
+        submitButton.addTarget(self, action: #selector(didTapSubmit), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([
             submitButton.leadingAnchor.constraint(equalTo: hintLabel.leadingAnchor),
             submitButton.trailingAnchor.constraint(equalTo: hintLabel.trailingAnchor),
@@ -207,6 +238,12 @@ extension ProfileDataFormViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         scrollView.setContentOffset(.zero, animated: true)
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        guard let bio = textView.text else { return }
+        viewModel.bio = bio
+        viewModel.validateUserProfileForm()
+    }
 }
 
 extension ProfileDataFormViewController: PHPickerViewControllerDelegate {
@@ -217,6 +254,8 @@ extension ProfileDataFormViewController: PHPickerViewControllerDelegate {
                 if let image = object as? UIImage {
                     DispatchQueue.main.async {
                         self?.avatarPlaceholderImageView.image = image
+                        self?.viewModel.image = image
+                        self?.viewModel.validateUserProfileForm()
                     }
                 }
             }

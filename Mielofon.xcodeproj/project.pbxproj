@@ -36,6 +36,7 @@
 		02A84DE52A644FFB001D1C17 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A84DE42A644FFB001D1C17 /* OnboardingViewController.swift */; };
 		02C6A0612A66068200E5E731 /* ProfileDataFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6A0602A66068200E5E731 /* ProfileDataFormViewController.swift */; };
 		02C6A0632A66192600E5E731 /* ProfileDataFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6A0622A66192600E5E731 /* ProfileDataFormViewModel.swift */; };
+		02C6A0652A66507D00E5E731 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6A0642A66507D00E5E731 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		02A84DE42A644FFB001D1C17 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		02C6A0602A66068200E5E731 /* ProfileDataFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewController.swift; sourceTree = "<group>"; };
 		02C6A0622A66192600E5E731 /* ProfileDataFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewModel.swift; sourceTree = "<group>"; };
+		02C6A0642A66507D00E5E731 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			children = (
 				021FAD8F2A64DE4000B183C3 /* AuthManager.swift */,
 				021FAD9B2A653A0000B183C3 /* DatabaseManager.swift */,
+				02C6A0642A66507D00E5E731 /* StorageManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C6A0652A66507D00E5E731 /* StorageManager.swift in Sources */,
 				021FAD8D2A64D09F00B183C3 /* AuthenticationViewModel.swift in Sources */,
 				026233992A6394F800386A91 /* ProfileTableViewHeader.swift in Sources */,
 				021FAD9C2A653A0000B183C3 /* DatabaseManager.swift in Sources */,
