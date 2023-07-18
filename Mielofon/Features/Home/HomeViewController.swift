@@ -1,8 +1,10 @@
 import UIKit
 import FirebaseAuth
-
+import Combine
 final class HomeViewController: UIViewController {
 
+    private var viewModel = HomeViewModel()
+    private var subscriptions: Set<AnyCancellable> = []
     private let timelineTableView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,6 +15,7 @@ final class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
         handleAuthentication()
+        viewModel.retrivePerson()
     }
 }
 // MARK: - Actions
@@ -34,6 +37,22 @@ extension HomeViewController {
             present(controller, animated: false)
         }
     }
+    
+    private func bindViews() {
+        viewModel.$person
+            .sink { [weak self] person in
+                guard let person else { return }
+                if !person.isUserOnboarded {
+                    self?.comletePersonOnboarding()
+                }
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func comletePersonOnboarding() {
+        let controller = ProfileDataFormViewController()
+        present(controller, animated: true)
+    }
 }
 
 // MARK: - Setup Views
@@ -41,6 +60,7 @@ extension HomeViewController {
     private func setupViews() {
         setupTimelineTableView()
         configureNavigationBar()
+        bindViews()
     }
     
     private func setupTimelineTableView() {

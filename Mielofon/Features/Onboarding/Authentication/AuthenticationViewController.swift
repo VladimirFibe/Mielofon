@@ -44,12 +44,29 @@ extension AuthenticationViewController {
     @objc private func didTapToDismiss() {
         view.endEditing(true)
     }
+    
+    private func presentAlert(with error: String) {
+        let alert = UIAlertController(title: "Error",
+                                      message: error,
+                                      preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(ok)
+        present(alert, animated: true)
+    }
 }
 // MARK: - Setup Views
 extension AuthenticationViewController {
     private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        bindViews()
+        setupRegisterTitleLabel()
+        setupEmailTextField()
+        setupPasswordTextField()
+        setupRegisterButton()
+    }
+    
+    private func bindViews() {
         viewModel.$isAuthenticationFormValid
             .sink { [weak self] value in self?.registerButton.isEnabled = value }
             .store(in: &subscriptions)
@@ -61,10 +78,13 @@ extension AuthenticationViewController {
                 }
             }
             .store(in: &subscriptions)
-        setupRegisterTitleLabel()
-        setupEmailTextField()
-        setupPasswordTextField()
-        setupRegisterButton()
+        viewModel.$error
+            .sink {[weak self] error in
+                if let error {
+                    self?.presentAlert(with: error)
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     private func setupRegisterTitleLabel() {

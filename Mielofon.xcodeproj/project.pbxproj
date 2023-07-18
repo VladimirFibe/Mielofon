@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		021FAD8A2A64C05300B183C3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD892A64C05300B183C3 /* RegisterViewController.swift */; };
 		021FAD8D2A64D09F00B183C3 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD8C2A64D09F00B183C3 /* AuthenticationViewModel.swift */; };
 		021FAD902A64DE4000B183C3 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD8F2A64DE4000B183C3 /* AuthManager.swift */; };
-		021FAD942A6503C100B183C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD932A6503C100B183C3 /* LoginViewController.swift */; };
 		021FAD972A650AEA00B183C3 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD962A650AEA00B183C3 /* AuthenticationViewController.swift */; };
+		021FAD9A2A65357F00B183C3 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD992A65357F00B183C3 /* Person.swift */; };
+		021FAD9C2A653A0000B183C3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD9B2A653A0000B183C3 /* DatabaseManager.swift */; };
+		021FAD9E2A65A63400B183C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FAD9D2A65A63400B183C3 /* HomeViewModel.swift */; };
 		023F297D2A631D7100986DB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F297C2A631D7100986DB4 /* AppDelegate.swift */; };
 		023F297F2A631D7100986DB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F297E2A631D7100986DB4 /* SceneDelegate.swift */; };
 		023F29812A631D7100986DB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F29802A631D7100986DB4 /* ViewController.swift */; };
@@ -33,14 +34,17 @@
 		02A84DE02A644551001D1C17 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 02A84DDF2A644551001D1C17 /* FirebaseStorage */; };
 		02A84DE22A644551001D1C17 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 02A84DE12A644551001D1C17 /* FirebaseStorageCombine-Community */; };
 		02A84DE52A644FFB001D1C17 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A84DE42A644FFB001D1C17 /* OnboardingViewController.swift */; };
+		02C6A0612A66068200E5E731 /* ProfileDataFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6A0602A66068200E5E731 /* ProfileDataFormViewController.swift */; };
+		02C6A0632A66192600E5E731 /* ProfileDataFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6A0622A66192600E5E731 /* ProfileDataFormViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		021FAD892A64C05300B183C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		021FAD8C2A64D09F00B183C3 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		021FAD8F2A64DE4000B183C3 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		021FAD932A6503C100B183C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		021FAD962A650AEA00B183C3 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		021FAD992A65357F00B183C3 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		021FAD9B2A653A0000B183C3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		021FAD9D2A65A63400B183C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		023F29792A631D7100986DB4 /* Mielofon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mielofon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		023F297C2A631D7100986DB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		023F297E2A631D7100986DB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +58,8 @@
 		026233982A6394F800386A91 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
 		02A84DCC2A643B7B001D1C17 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		02A84DE42A644FFB001D1C17 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		02C6A0602A66068200E5E731 /* ProfileDataFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewController.swift; sourceTree = "<group>"; };
+		02C6A0622A66192600E5E731 /* ProfileDataFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,18 +83,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		021FAD8B2A64D08D00B183C3 /* Register */ = {
-			isa = PBXGroup;
-			children = (
-				021FAD892A64C05300B183C3 /* RegisterViewController.swift */,
-			);
-			path = Register;
-			sourceTree = "<group>";
-		};
 		021FAD8E2A64DDC200B183C3 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				021FAD8F2A64DE4000B183C3 /* AuthManager.swift */,
+				021FAD9B2A653A0000B183C3 /* DatabaseManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -101,14 +100,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		021FAD922A6503AF00B183C3 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				021FAD932A6503C100B183C3 /* LoginViewController.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		021FAD952A650ABC00B183C3 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +107,14 @@
 				021FAD962A650AEA00B183C3 /* AuthenticationViewController.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		021FAD982A65353D00B183C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				021FAD992A65357F00B183C3 /* Person.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		023F29702A631D7100986DB4 = {
@@ -137,6 +136,7 @@
 		023F297B2A631D7100986DB4 /* Mielofon */ = {
 			isa = PBXGroup;
 			children = (
+				021FAD982A65353D00B183C3 /* Models */,
 				021FAD8E2A64DDC200B183C3 /* Networking */,
 				023F29972A6321C900986DB4 /* Supporting Files */,
 				023F29982A6321E500986DB4 /* App */,
@@ -160,6 +160,8 @@
 			children = (
 				026233962A6386A100386A91 /* ProfileViewController.swift */,
 				026233982A6394F800386A91 /* ProfileTableViewHeader.swift */,
+				02C6A0602A66068200E5E731 /* ProfileDataFormViewController.swift */,
+				02C6A0622A66192600E5E731 /* ProfileDataFormViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -169,6 +171,7 @@
 			children = (
 				023F29922A63200400986DB4 /* TweetTableViewCell.swift */,
 				023F29902A631FC800986DB4 /* HomeViewController.swift */,
+				021FAD9D2A65A63400B183C3 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -198,9 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				021FAD952A650ABC00B183C3 /* Authentication */,
-				021FAD922A6503AF00B183C3 /* Login */,
 				021FAD912A64ECCA00B183C3 /* Onboarding */,
-				021FAD8B2A64D08D00B183C3 /* Register */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -291,15 +292,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				021FAD942A6503C100B183C3 /* LoginViewController.swift in Sources */,
-				021FAD8A2A64C05300B183C3 /* RegisterViewController.swift in Sources */,
 				021FAD8D2A64D09F00B183C3 /* AuthenticationViewModel.swift in Sources */,
 				026233992A6394F800386A91 /* ProfileTableViewHeader.swift in Sources */,
+				021FAD9C2A653A0000B183C3 /* DatabaseManager.swift in Sources */,
 				026233972A6386A100386A91 /* ProfileViewController.swift in Sources */,
+				02C6A0632A66192600E5E731 /* ProfileDataFormViewModel.swift in Sources */,
 				023F29812A631D7100986DB4 /* ViewController.swift in Sources */,
 				02A84DE52A644FFB001D1C17 /* OnboardingViewController.swift in Sources */,
+				02C6A0612A66068200E5E731 /* ProfileDataFormViewController.swift in Sources */,
 				023F297D2A631D7100986DB4 /* AppDelegate.swift in Sources */,
+				021FAD9A2A65357F00B183C3 /* Person.swift in Sources */,
 				023F297F2A631D7100986DB4 /* SceneDelegate.swift in Sources */,
+				021FAD9E2A65A63400B183C3 /* HomeViewModel.swift in Sources */,
 				021FAD902A64DE4000B183C3 /* AuthManager.swift in Sources */,
 				021FAD972A650AEA00B183C3 /* AuthenticationViewController.swift in Sources */,
 				023F29932A63200400986DB4 /* TweetTableViewCell.swift in Sources */,
