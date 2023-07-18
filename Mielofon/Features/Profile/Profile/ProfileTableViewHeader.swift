@@ -45,6 +45,10 @@ final class ProfileTableViewHeader: UIView {
         userBioLabel.text = person.bio
         followersCountLabel.text = "\(person.followersCount)"
         followingCountLabel.text = "\(person.followingCount)"
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_us")
+        dateFormatter.dateFormat = "MMM YYYY"
+        joinDateLabel.text = "Joined " + dateFormatter.string(from: person.createdOn)
     }
 }
 // MARK: - Actions
@@ -153,7 +157,6 @@ extension ProfileTableViewHeader {
         addSubview(joinDateLabel)
         joinDateLabel.translatesAutoresizingMaskIntoConstraints = false
         joinDateLabel.textColor = .secondaryLabel
-        joinDateLabel.text = "Joined May 2009"
         joinDateLabel.font = .systemFont(ofSize: 14)
         NSLayoutConstraint.activate([
             joinDateLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: joinDateImageView.trailingAnchor, multiplier: 1),

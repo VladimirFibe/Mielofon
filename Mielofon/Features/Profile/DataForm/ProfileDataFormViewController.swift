@@ -199,7 +199,7 @@ extension ProfileDataFormViewController {
     private func setupSubmitButton() {
         scrollView.addSubview(submitButton)
         submitButton.translatesAutoresizingMaskIntoConstraints = false
-        submitButton.backgroundColor = .blue
+        submitButton.backgroundColor = .twitterBlueColor
         submitButton.layer.masksToBounds = true
         submitButton.layer.cornerRadius = 8
         submitButton.tintColor = .white

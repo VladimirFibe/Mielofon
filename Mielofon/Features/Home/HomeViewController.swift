@@ -6,6 +6,8 @@ final class HomeViewController: UIViewController {
     private var viewModel = HomeViewModel()
     private var subscriptions: Set<AnyCancellable> = []
     private let timelineTableView = UITableView()
+    private let composeTweetButton = UIButton(type: .system)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -28,6 +30,12 @@ extension HomeViewController {
     @objc private func didTapLogout() {
         AuthManager.shared.signOut()
         handleAuthentication()
+    }
+    
+    @objc private func didTapCompose() {
+        let controller = UINavigationController(rootViewController: TweetComposeViewController())
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true)
     }
     
     private func handleAuthentication() {
@@ -60,6 +68,7 @@ extension HomeViewController {
     private func setupViews() {
         setupTimelineTableView()
         configureNavigationBar()
+        setupComposeTweetButton()
         bindViews()
     }
     
@@ -98,6 +107,25 @@ extension HomeViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(didTapLogout))
+    }
+    
+    private func setupComposeTweetButton() {
+        view.addSubview(composeTweetButton)
+        composeTweetButton.translatesAutoresizingMaskIntoConstraints = false
+        composeTweetButton.addTarget(self, action: #selector(didTapCompose), for: .primaryActionTriggered)
+        composeTweetButton.backgroundColor = .twitterBlueColor
+        composeTweetButton.tintColor = .white
+        let plusSign = UIImage(systemName: "plus",
+                               withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold))
+        composeTweetButton.setImage(plusSign, for: [])
+        composeTweetButton.layer.cornerRadius = 28
+        composeTweetButton.layer.masksToBounds = true
+        NSLayoutConstraint.activate([
+            composeTweetButton.widthAnchor.constraint(equalToConstant: 56),
+            composeTweetButton.heightAnchor.constraint(equalToConstant: 56),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: composeTweetButton.trailingAnchor, multiplier: 2),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: composeTweetButton.bottomAnchor, multiplier: 2)
+        ])
     }
 }
 // MARK: - UITableViewDelegate

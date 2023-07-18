@@ -83,7 +83,7 @@ extension OnboardingViewController {
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.setTitle("Login", for: [])
         loginButton.titleLabel?.font = .systemFont(ofSize: 14)
-        loginButton.tintColor = .blue
+        loginButton.tintColor = .twitterBlueColor
         loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .primaryActionTriggered)
         NSLayoutConstraint.activate([
             loginButton.centerYAnchor.constraint(equalTo: promptLabel.centerYAnchor),
