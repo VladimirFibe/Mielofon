@@ -16,13 +16,12 @@ class OnboardingViewController: UIViewController {
 // MARK: - Action
 extension OnboardingViewController {
     @objc private func didTapRegisterButton() {
-        let controller = AuthenticationViewController()
+        let controller = RegisterViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc private func didTapLoginButton() {
-        let controller = AuthenticationViewController()
-        controller.isLogin = true
+        let controller = LoginViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
 }

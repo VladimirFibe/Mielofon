@@ -12,6 +12,7 @@ class AuthenticationViewController: UIViewController {
     private let emailTextField = UITextField()
     private let passwordTextField = UITextField()
     private let registerButton = UIButton(type: .system)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
