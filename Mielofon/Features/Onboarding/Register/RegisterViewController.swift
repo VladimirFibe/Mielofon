@@ -205,21 +205,21 @@ extension RegisterViewController: PHPickerViewControllerDelegate {
 // MARK: - UIImagePickerControllerDelegate
 extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func presentPhotoActionSheet() {
-        let actionSheet = UIAlertController(title: "Profile Picture",
-                                            message: "How would you like to select a picture?",
-                                            preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Cancel",
-                                            style: .cancel))
-        actionSheet.addAction(UIAlertAction(title: "Take Photo",
-                                            style: .default,
-                                            handler: { [weak self] _ in
-            self?.presentCamera()
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Choose Photo",
-                                            style: .default,
-                                            handler: { [weak self] _ in
-            self?.presentPhotoPicker()
-        }))
+        let actionSheet = UIAlertController(
+            title: "Profile Picture",
+            message: "How would you like to select a picture?",
+            preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel))
+        actionSheet.addAction(UIAlertAction(
+            title: "Take Photo",
+            style: .default,
+            handler: { [weak self] _ in self?.presentCamera() }))
+        actionSheet.addAction(UIAlertAction(
+            title: "Choose Photo",
+            style: .default,
+            handler: { [weak self] _ in self?.presentPhotoPicker() }))
         present(actionSheet, animated: true)
     }
     
@@ -231,7 +231,8 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         present(controller, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
         self.imageView.image = selectedImage
