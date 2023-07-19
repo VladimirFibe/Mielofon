@@ -17,7 +17,7 @@ final class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
         handleAuthentication()
-        viewModel.retrivePerson()
+        viewModel.fetchPerson()
     }
 }
 // MARK: - Actions
@@ -52,6 +52,14 @@ extension HomeViewController {
                 guard let person else { return }
                 if !person.isUserOnboarded {
                     self?.comletePersonOnboarding()
+                }
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$tweets
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.timelineTableView.reloadData()
                 }
             }
             .store(in: &subscriptions)
@@ -137,12 +145,14 @@ extension HomeViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        12
+        viewModel.tweets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as? TweetTableViewCell else { return UITableViewCell()
         }
+        let tweet = viewModel.tweets[indexPath.row]
+        cell.configure(with: tweet)
         cell.delegate = self
         return cell
     }

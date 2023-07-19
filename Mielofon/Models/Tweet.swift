@@ -2,7 +2,8 @@ import Foundation
 
 struct Tweet: Codable {
     var id = UUID().uuidString
-    let author: Person
+    let person: Person
+    let uid: String
     let content: String
     var likes: Int
     var likers: [String]

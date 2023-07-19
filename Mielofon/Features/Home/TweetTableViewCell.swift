@@ -28,6 +28,14 @@ final class TweetTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(with tweet: Tweet) {
+        tweetTextContentLabel.text = tweet.content
+        let url = URL(string: tweet.person.avatar)
+        avatarImageView.kf.setImage(with: url)
+        displayNameLabel.text = tweet.person.displayName
+        usernameLabel.text = "@\(tweet.person.username)"
+    }
 }
 // MARK: - Actions
 extension TweetTableViewCell {
@@ -63,8 +71,9 @@ extension TweetTableViewCell {
     private func setupAvatarImageView() {
         contentView.addSubview(avatarImageView)
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        avatarImageView.image = UIImage(systemName: "person")
         avatarImageView.contentMode = .scaleAspectFill
+        avatarImageView.layer.cornerRadius = 25
+        avatarImageView.layer.masksToBounds = true
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1),
             avatarImageView.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
@@ -76,7 +85,6 @@ extension TweetTableViewCell {
     private func setupDisplayNameLabel() {
         contentView.addSubview(displayNameLabel)
         displayNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        displayNameLabel.text = "Vladimir Fibe"
         displayNameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         NSLayoutConstraint.activate([
             displayNameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
@@ -87,7 +95,6 @@ extension TweetTableViewCell {
     private func setupUsernameLabel() {
         contentView.addSubview(usernameLabel)
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
-        usernameLabel.text = "@macuser"
         usernameLabel.textColor = .secondaryLabel
         usernameLabel.font = .systemFont(ofSize: 16)
         NSLayoutConstraint.activate([
